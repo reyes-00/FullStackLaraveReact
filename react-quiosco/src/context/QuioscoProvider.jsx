@@ -6,7 +6,7 @@ import clienteAxios from '../config/axios'
 
 const QuioscoContext = createContext();
 
-const QuioscoProvider = ({children}) => {
+export const QuioscoProvider = ({children}) => {
   const [categorias, setCategorias] = useState ([])
   const [categoriaActal, setCatgoriaActual] = useState ({});
   const [modal, setModal] = useState(false)
@@ -91,7 +91,4 @@ const QuioscoProvider = ({children}) => {
   )
 }
 
-export {
-  QuioscoProvider
-}
 export default QuioscoContext

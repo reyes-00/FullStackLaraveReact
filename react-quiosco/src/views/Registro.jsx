@@ -1,6 +1,7 @@
 import {createRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import clienteAxios from '../config/axios';
+import Alerta from '../components/Alerta';
 
 export default function Registro() {
   const nameRef = createRef();
@@ -20,10 +21,10 @@ export default function Registro() {
     }
 
     try {
-      const data = await clienteAxios.post('api/register',datos)
-      console.log(data);
+      const {data} = await clienteAxios.post('api/register',datos)
+      console.log(data.token);
     } catch (error) {
-      console.log(error.response.data.erro);
+      setErrores(Object.values(error.response.data.errors));
     }
     
   }
@@ -33,6 +34,9 @@ export default function Registro() {
       <p>Crea tu cuenta llenando el formulario</p>
       
       <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
+        {
+          errores ? errores.map((error, i) => <Alerta key={i}>{error}</Alerta>) : null
+        }
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
               <label
